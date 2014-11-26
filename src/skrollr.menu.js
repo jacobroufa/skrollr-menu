@@ -142,8 +142,6 @@
 
 		//Now finally scroll there.
 		if(_animate && !fake) {
-      activateLink( link );
-
 			_skrollrInstance.animateTo(targetTop, {
 				duration: animationDuration,
 				easing: _easing
@@ -153,6 +151,8 @@
 				_skrollrInstance.setScrollTop(targetTop);
 			});
 		}
+
+    activateLink( link );
 
 		return true;
 	};
