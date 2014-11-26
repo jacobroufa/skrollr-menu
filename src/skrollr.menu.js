@@ -142,6 +142,8 @@
 
 		//Now finally scroll there.
 		if(_animate && !fake) {
+      activateLink( link );
+
 			_skrollrInstance.animateTo(targetTop, {
 				duration: animationDuration,
 				easing: _easing
@@ -154,6 +156,28 @@
 
 		return true;
 	};
+
+  var activateLink = function( link ) {
+    var classes = link.className;
+
+    stripActiveLinks();
+
+    link.className = classes + ' active';
+  };
+
+  var stripActiveLinks = function() {
+    var links;
+
+    if ( _parentNav ) {
+      links = _parentNav.querySelectorAll( 'a.active' );
+    } else {
+      links = document.body.querySelectorAll( 'a.active' );
+    }
+
+    Array.prototype.forEach.call( links, function( link ) {
+      link.className = link.className.replace( /(?:^|\s)active(?!\S)/ , '' );
+    });
+  };
 
 	var jumpStraightToHash = function() {
 		if(window.location.hash && document.querySelector) {
@@ -188,6 +212,7 @@
 		_handleLink = options.handleLink;
 		_scale = options.scale || DEFAULT_SCALE;
 		_complexLinks = options.complexLinks === true;
+    _parentNav = options.parentNav;
 
 		if(typeof _duration === 'number') {
 			_duration = (function(duration) {
@@ -229,6 +254,7 @@
 	var _handleLink;
 	var _scale;
 	var _complexLinks;
+  var _parentNav;
 
 	//In case the page was opened with a hash, prevent jumping to it.
 	//http://stackoverflow.com/questions/3659072/jquery-disable-anchor-jump-when-loading-a-page

@@ -49,7 +49,11 @@ skrollr.menu.init(s, {
 	//http://example.com/currentPage/#foo
 	//http://example.com/currentDir/currentPage.html?foo=bar#foo
 	///?foo=bar#foo
-	complexLinks: false
+	complexLinks: false,
+
+  //By default, skrollr-menu will remove the “active” class from anchor tags throughout the entire document.
+  //If you pass `parentNav` an Element it will limit the “active” class removal to that container node.
+  parentNav: document.getElementById( ‘skrollr-navigation’ )
 });
 ```
 
